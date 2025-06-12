@@ -25,39 +25,54 @@ const getRecommendation = (scores) => {
   };
 };
 
+const getScoreLevel = (score) => {
+  if (score >= 8) return { text: 'Excellent', emoji: '🌟', color: '#10b981' };
+  if (score >= 6) return { text: 'Good', emoji: '👍', color: '#06b6d4' };
+  if (score >= 4) return { text: 'Fair', emoji: '⚖️', color: '#f59e0b' };
+  return { text: 'Needs Focus', emoji: '💪', color: '#ef4444' };
+};
+
 const Results = ({ onNext, answers }) => {
   const recommendation = getRecommendation(answers);
   const averageScore = (Object.values(answers).reduce((a, b) => a + b, 0) / Object.values(answers).length).toFixed(1);
+  const scoreLevel = getScoreLevel(parseFloat(averageScore));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-md p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className="app-container">
+      <div className="card fade-in">
+        <div className="status-badge" style={{ background: scoreLevel.color }}>
+          {scoreLevel.emoji} {scoreLevel.text}
+        </div>
+        <h2 className="title" style={{ textAlign: 'center' }}>
           Your Wellness Snapshot
         </h2>
+        <p className="text-sm" style={{ textAlign: 'center', marginBottom: '24px', marginTop: '8px' }}>
+          Here's how you're doing across all wellness areas
+        </p>
 
-        <div className="mb-8">
+        <div className="chart-container">
           <ChartComponent userScores={answers} />
         </div>
 
-        <div className="bg-indigo-50 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-semibold text-indigo-800 mb-4">
-            Your Results
+        <div className="results-section">
+          <h3 className="results-title">
+            📊 Your Overall Score
           </h3>
-          <p className="text-gray-700 mb-4">
-            Overall Score: <span className="font-bold text-indigo-600">{averageScore}/10</span>
-          </p>
-          <p className="text-gray-700">
-            You're strong in <span className="font-semibold">{recommendation.highest}</span>, 
-            but consider focusing more on <span className="font-semibold">{recommendation.lowest}</span>.
+          <div className="results-score">
+            Overall Wellness Score: <span className="score-highlight">{averageScore}/10</span>
+          </div>
+          <p className="results-text">
+            💪 You're strong in <span style={{ fontWeight: '600', color: 'var(--primary)' }}>{recommendation.highest}</span>, 
+            but consider focusing more on <span style={{ fontWeight: '600', color: 'var(--accent)' }}>{recommendation.lowest}</span> 
+            to enhance your overall wellness journey.
           </p>
         </div>
 
         <button
           onClick={onNext}
-          className="w-full bg-indigo-600 text-white py-3 px-6 rounded-xl hover:bg-indigo-700 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="btn"
         >
-          Continue
+          Get My Action Plan 📋
         </button>
       </div>
     </div>

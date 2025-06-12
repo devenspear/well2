@@ -10,76 +10,76 @@ const Demographics = ({ onNext, formData, setFormData }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-md p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className="app-container">
+      <div className="card fade-in">
+        <div className="status-badge">
+          👤 About You
+        </div>
+        <h2 className="title" style={{ textAlign: 'center' }}>
           Tell us about yourself
         </h2>
+        <p className="text-sm" style={{ textAlign: 'center', marginBottom: '32px', marginTop: '8px' }}>
+          This helps us provide personalized insights
+        </p>
         
-        <div className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Age Range
-            </label>
-            <select
-              name="ageRange"
-              value={formData.ageRange}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            >
-              <option value="">Select age range</option>
-              <option value="50-59">50-59</option>
-              <option value="60-69">60-69</option>
-              <option value="70-79">70-79</option>
-              <option value="80+">80+</option>
-            </select>
-          </div>
+        <div className="form-group">
+          <label className="form-label">
+            Age Range
+          </label>
+          <select
+            name="ageRange"
+            value={formData.ageRange}
+            onChange={handleChange}
+            className="form-select"
+            required
+          >
+            <option value="">Select your age range</option>
+            <option value="50-59">50-59 years</option>
+            <option value="60-69">60-69 years</option>
+            <option value="70-79">70-79 years</option>
+            <option value="80+">80+ years</option>
+          </select>
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Gender
-            </label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            >
-              <option value="">Select gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-              <option value="prefer-not-to-say">Prefer not to say</option>
-            </select>
-          </div>
+        <div className="form-group">
+          <label className="form-label">
+            Gender
+          </label>
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="form-select"
+            required
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="prefer-not-to-say">Prefer not to say</option>
+          </select>
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Location (Optional)
-            </label>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="City, State"
-              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
+        <div className="form-group">
+          <label className="form-label">
+            Location (Optional)
+          </label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            placeholder="e.g., San Francisco, CA"
+            className="form-input"
+          />
         </div>
 
         <button
           onClick={onNext}
           disabled={!formData.ageRange || !formData.gender}
-          className={`w-full mt-8 py-3 px-6 rounded-xl text-white transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${
-            !formData.ageRange || !formData.gender
-              ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-indigo-600 hover:bg-indigo-700'
-          }`}
+          className="btn"
         >
-          Continue to Assessment
+          Continue to Assessment →
         </button>
       </div>
     </div>

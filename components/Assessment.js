@@ -4,32 +4,38 @@ const questions = [
   {
     id: 'energy',
     question: "How energetic do you feel throughout your average day?",
-    category: "Body & Energy"
+    category: "Body & Energy",
+    emoji: "⚡"
   },
   {
     id: 'movement',
     question: "How often do you engage in physical activity (e.g., walking, stretching)?",
-    category: "Movement & Exercise"
+    category: "Movement & Exercise",
+    emoji: "🏃‍♀️"
   },
   {
     id: 'sleep',
     question: "How well-rested do you feel when you wake up?",
-    category: "Sleep & Recovery"
+    category: "Sleep & Recovery",
+    emoji: "😴"
   },
   {
     id: 'nutrition',
     question: "How would you rate your current eating and hydration habits?",
-    category: "Nutrition & Hydration"
+    category: "Nutrition & Hydration",
+    emoji: "🥗"
   },
   {
     id: 'mood',
     question: "How often do you feel mentally calm and emotionally balanced?",
-    category: "Mind & Mood"
+    category: "Mind & Mood",
+    emoji: "🧘‍♀️"
   },
   {
     id: 'purpose',
     question: "How connected do you feel to purpose, community, or goals?",
-    category: "Purpose & Engagement"
+    category: "Purpose & Engagement",
+    emoji: "🎯"
   }
 ];
 
@@ -56,31 +62,31 @@ const Assessment = ({ onComplete, answers, setAnswers }) => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-md p-8">
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Question {currentQuestion + 1} of {questions.length}</span>
-            <span>{Math.round(progress)}% Complete</span>
+    <div className="app-container">
+      <div className="card fade-in">
+        <div className="progress-container">
+          <div className="progress-info" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <span className="progress-text">Question {currentQuestion + 1} of {questions.length}</span>
+            <span className="progress-text">{Math.round(progress)}% Complete</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="progress-bar">
             <div
-              className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+              className="progress-fill"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
-        <div className="mb-8">
-          <h3 className="text-sm font-medium text-indigo-600 mb-2">
-            {currentQ.category}
-          </h3>
-          <h2 className="text-xl font-semibold text-gray-800">
+        <div className="question-section">
+          <div className="question-category">
+            {currentQ.emoji} {currentQ.category}
+          </div>
+          <h2 className="question-text">
             {currentQ.question}
           </h2>
         </div>
 
-        <div className="mb-8">
+        <div className="slider-container">
           <input
             type="range"
             name={currentQ.id}
@@ -88,22 +94,22 @@ const Assessment = ({ onComplete, answers, setAnswers }) => {
             max="10"
             value={answers[currentQ.id] || 5}
             onChange={handleSliderChange}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="slider"
           />
-          <div className="flex justify-between text-sm text-gray-600 mt-2">
-            <span>0</span>
-            <span className="text-xl font-bold text-indigo-600">
+          <div className="slider-labels">
+            <span className="slider-label">Not at all</span>
+            <span className="slider-value">
               {answers[currentQ.id] || 5}
             </span>
-            <span>10</span>
+            <span className="slider-label">Extremely</span>
           </div>
         </div>
 
         <button
           onClick={handleNext}
-          className="w-full bg-indigo-600 text-white py-3 px-6 rounded-xl hover:bg-indigo-700 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="btn"
         >
-          {currentQuestion < questions.length - 1 ? 'Next Question' : 'See Results'}
+          {currentQuestion < questions.length - 1 ? 'Next Question →' : 'See My Results 🎉'}
         </button>
       </div>
     </div>
