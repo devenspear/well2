@@ -32,20 +32,27 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  height: 100vh;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 /* App Container */
 .app-container {
   min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .app-container::before {
@@ -60,6 +67,7 @@ body {
     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
   z-index: -1;
+  pointer-events: none;
 }
 
 /* Main Card */
@@ -77,15 +85,7 @@ body {
   overflow: hidden;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-}
+/* Removed color strip at the top of the card */
 
 /* Typography */
 .title {
@@ -476,6 +476,12 @@ body {
 @media (max-width: 480px) {
   .app-container {
     padding: 16px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
   
   .card {
