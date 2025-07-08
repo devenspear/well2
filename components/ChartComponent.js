@@ -80,7 +80,10 @@ const ChartComponent = ({ userScores }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="w-full max-w-md mx-auto p-4" style={{ 
+      WebkitOverflowScrolling: 'touch',
+      touchAction: 'manipulation'
+    }}>
       <Radar data={data} options={options} />
     </div>
   );

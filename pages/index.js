@@ -48,7 +48,10 @@ export default function Home() {
       <Head>
         <title>Wellness Snapshot</title>
         <meta name="description" content="Take your wellness assessment today" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
@@ -76,7 +79,11 @@ export default function Home() {
           />
         )}
         {currentPage === 'final' && (
-          <FinalCTA onRestart={handleRestart} />
+          <FinalCTA 
+            onRestart={handleRestart}
+            formData={formData}
+            answers={answers}
+          />
         )}
       </main>
     </>
